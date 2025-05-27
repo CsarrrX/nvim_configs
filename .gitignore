@@ -1,0 +1,16 @@
+# .gitignore for Neovim config
+
+# Lazy.nvim plugin manager directory
+.local/share/nvim/lazy/
+# Mason.nvim installed LSP servers and tools
+.local/share/nvim/mason/
+# Swap files
+**/*.swp
+# Backup files
+**/*~
+# Persistent undo files
+.local/share/nvim/undo/
+# Session files
+.local/share/nvim/sessions/
+# Log files
+*.log
