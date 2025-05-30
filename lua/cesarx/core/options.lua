@@ -32,4 +32,10 @@ vim.opt.signcolumn = "yes"
 vim.opt.clipboard:append("unnamedplus")
 vim.opt.mouse = "a"
 
-
+-- Reconocimiento automático para archivos .slint
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*.slint",
+  callback = function()
+    vim.o.filetype = "slint"
+  end,
+})

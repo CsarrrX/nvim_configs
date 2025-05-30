@@ -26,7 +26,6 @@ return {
                         cargo = {
                             clippy = {
                                 features = "all",  -- Opcional: habilitar todos los features
-                                extraArgs = { "--", "-W", "clippy::pedantic" },  -- Flags de Clippy
                             },
                         },
                     },
