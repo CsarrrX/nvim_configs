@@ -16,5 +16,6 @@ vim.keymap.set("v", ">", ">gv", opts)
 vim.keymap.set("n", "x", '"_x', opts)
 
 -- Busqueda y reemplazamiento global bajo el cursor
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-    { desc = "Replace word cursor is on globally" })
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word cursor is on globally" })
+
+vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, { desc = "Mostrar error actual" })

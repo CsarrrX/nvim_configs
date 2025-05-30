@@ -20,6 +20,17 @@ return {
 
     rt.setup({
       server = {
+        settings = {
+                    ["rust-analyzer"] = {
+                        checkOnSave = true,  -- Habilitar verificaciones al guardar
+                        cargo = {
+                            clippy = {
+                                features = "all",  -- Opcional: habilitar todos los features
+                                extraArgs = { "--", "-W", "clippy::pedantic" },  -- Flags de Clippy
+                            },
+                        },
+                    },
+                },
         on_attach = function(_, bufnr)
           -- Hover actions (corregido "\n" por "n" para modo normal)
           vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { 
