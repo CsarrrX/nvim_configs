@@ -1,22 +1,39 @@
--- Archivo: ~/.config/nvim/lua/plugins/rust-lsp.lua
--- o donde tengas tus plugins configurados
-
 return {
-  {
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
-    },
-    config = function()
-      -- PRIMERO: Configurar Mason
-      require('mason').setup()
-      
-      -- SEGUNDO: Configurar mason-lspconfig
-      require('mason-lspconfig').setup({
-        automatic_installation = true,
-      })
+  'neovim/nvim-lspconfig',
+  dependencies = {
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'simrat39/rust-tools.nvim',  -- Mover la dependencia aquí
+  },
+  config = function()
+    -- PRIMERO: Configurar Mason
+    require('mason').setup()
 
-    end,
-  }
+    -- SEGUNDO: Configurar Mason-lspconfig
+    require('mason-lspconfig').setup({
+      automatic_installation = true,
+      ensure_installed = { "rust_analyzer" }  -- Asegurar que rust-analyzer esté instalado
+    })
+
+    -- TERCERO: Configurar rust-tools
+    local rt = require("rust-tools")  -- Corregido el nombre (era "rüst-tools")
+
+    rt.setup({
+      server = {
+        on_attach = function(_, bufnr)
+          -- Hover actions (corregido "\n" por "n" para modo normal)
+          vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { 
+            buffer = bufnr,
+            desc = "Rust hover actions" 
+          })
+
+          -- Code action groups
+          vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { 
+            buffer = bufnr,
+            desc = "Rust code actions" 
+          })
+        end,
+      }
+    })
+  end
 }
